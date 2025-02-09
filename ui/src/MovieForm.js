@@ -8,8 +8,14 @@ export default function MovieForm(props) {
 
     function addMovie(event) {
         event.preventDefault();
-        if (title.length < 5) {
+        if (title.length < 2) {
             return alert('Tytuł jest za krótki');
+        }
+        if (!year) {
+            return alert('Year cannot be empty');
+        }
+        if (isNaN(year)) {
+            return alert('Year must be a number');
         }
         props.onMovieSubmit({title, year, director, description});
         setTitle('');
@@ -18,24 +24,45 @@ export default function MovieForm(props) {
         setDescription('');
     }
 
-    return <form onSubmit={addMovie}>
-        <h2>Add movie</h2>
-        <div>
-            <label>Tytuł</label>
-            <input type="text" value={title} onChange={(event) => setTitle(event.target.value)}/>
-        </div>
-        <div>
-            <label>Year</label>
-            <input type="text" value={year} onChange={(event) => setYear(event.target.value)}/>
-        </div>
-        <div>
-            <label>Director</label>
-            <input type="text" value={director} onChange={(event) => setDirector(event.target.value)}/>
-        </div>
-        <div>
-            <label>Description</label>
-            <textarea value={description} onChange={(event) => setDescription(event.target.value)}/>
-        </div>
-        <button>{props.buttonLabel || 'Submit'}</button>
-    </form>;
+    return (
+        <form onSubmit={addMovie}>
+            <h2>Add movie</h2>
+            <div>
+                <label>Tytuł</label>
+                <input
+                    type="text"
+                    value={title}
+                    onChange={(event) => setTitle(event.target.value)}
+                    placeholder="Jurassic Park"
+                />
+            </div>
+            <div>
+                <label>Year</label>
+                <input
+                    type="text"
+                    value={year}
+                    onChange={(event) => setYear(event.target.value)}
+                    placeholder="2025"
+                />
+            </div>
+            <div>
+                <label>Director</label>
+                <input
+                    type="text"
+                    value={director}
+                    onChange={(event) => setDirector(event.target.value)}
+                    placeholder="Stephen Spielberg"
+                />
+            </div>
+            <div>
+                <label>Description</label>
+                <textarea
+                    value={description}
+                    onChange={(event) => setDescription(event.target.value)}
+                    placeholder="A movie about dinosaurs."
+                />
+            </div>
+            <button>{props.buttonLabel || 'Submit'}</button>
+        </form>
+    );
 }

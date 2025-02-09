@@ -39,24 +39,21 @@ function App() {
         
       }, []);
 
-
       async function handleDeleteMovie(movie) {
+        const confirmed = window.confirm(`Are you sure you want to delete this movie "${movie.title}"?`);
+        if (!confirmed) {
+          return;
+        }
 
         const response = await fetch(`/movies/${movie.id}`, {
-    
-            method: 'DELETE',
-    
+          method: 'DELETE',
         });
-    
+
         if (response.ok) {
-    
-            const nextMovies = movies.filter(m => m !== movie);
-    
-            setMovies(nextMovies);
-    
+          const nextMovies = movies.filter(m => m !== movie);
+          setMovies(nextMovies);
         }
-    
-    }
+      }
 
 
     return (
