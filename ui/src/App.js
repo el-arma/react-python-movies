@@ -55,6 +55,22 @@ function App() {
         }
       }
 
+      async function handleEditMovie(movie) {
+        const confirmed = window.confirm(`NOT FUNCTIONAL YET!!! "${movie.title}"?`);
+        if (!confirmed) {
+          return;
+        }
+
+        const response = await fetch(`/movies/${movie.id}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          const nextMovies = movies.filter(m => m !== movie);
+          setMovies(nextMovies);
+        }
+      }
+
 
     return (
         <div className="container">
@@ -63,6 +79,7 @@ function App() {
                 ? <p>No movies yet. Maybe add something?</p>
                 : <MoviesList movies={movies}
                               onDeleteMovie={handleDeleteMovie}
+                              onEditMovie={handleEditMovie}
                 />}
             {addingMovie
                 ? <MovieForm onMovieSubmit={handleAddMovie}

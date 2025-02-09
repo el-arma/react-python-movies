@@ -1,11 +1,11 @@
-from typing import List
 
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-
-import schemas
 import models
+import schemas
+from typing import List
+
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="../ui/build/static", check_dir=False), name="static")
@@ -42,3 +42,4 @@ def get_movie(movie_id: int):
         raise HTTPException(status_code=404, detail="Movie not found")
     db_movie.delete_instance()
     return db_movie
+
