@@ -9,7 +9,7 @@ export default function MovieForm(props) {
     function addMovie(event) {
         event.preventDefault();
         if (title.length < 2) {
-            return alert('Tytuł jest za krótki');
+            return alert('Title must be at least 2 characters long');
         }
         if (!year) {
             return alert('Year cannot be empty');
@@ -28,7 +28,7 @@ export default function MovieForm(props) {
         <form onSubmit={addMovie}>
             <h2>Add movie</h2>
             <div>
-                <label>Tytuł</label>
+                <label>Title</label>
                 <input
                     type="text"
                     value={title}

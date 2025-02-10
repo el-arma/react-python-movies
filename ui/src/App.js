@@ -56,19 +56,7 @@ function App() {
       }
 
       async function handleEditMovie(movie) {
-        const confirmed = window.confirm(`NOT FUNCTIONAL YET!!! "${movie.title}"?`);
-        if (!confirmed) {
-          return;
-        }
-
-        const response = await fetch(`/movies/${movie.id}`, {
-          method: 'DELETE',
-        });
-
-        if (response.ok) {
-          const nextMovies = movies.filter(m => m !== movie);
-          setMovies(nextMovies);
-        }
+        const confirmed = window.confirm(`NOT FUNCTIONAL YET!!!`);
       }
 
 
